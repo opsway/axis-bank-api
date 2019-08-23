@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OpsWay\Axis\Tests;
 
+use OpsWay\Axis\API;
+use OpsWay\Axis\Client;
 use OpsWay\Axis\Exception\FileNotFoundException;
 use OpsWay\Axis\Exception\InvalidFingerprintException;
 use OpsWay\Axis\Exception\NotValidJsonException;
@@ -20,7 +22,7 @@ class AxisBankTest extends TestCase
      */
     public function testPGPFlow()
     {
-        $encryptor = new Encryptor(new PGPStrategy('/app/tests/publickey.asc', '/app/tests/privatekey.asc', 'B0BEA975287EC03031647791ED71AEF26E6FB26D', 'password'));
+        $encryptor = new Encryptor(new PGPStrategy('publickey.asc', 'privatekey.asc', 'B0BEA975287EC03031647791ED71AEF26E6FB26D', 'password'));
 
         $message = $encryptor->doEncrypt(json_encode(['test' => 123]));
 
